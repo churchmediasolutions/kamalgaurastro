@@ -1,12 +1,15 @@
 ---
 import Item from '~/components/blog/ListItem.astro';
 import type { Post } from '~/types';
+import { getPosts } from '~/utils/api';
 
 export interface Props {
   posts: Array<Post>;
 }
 
-const { posts } = Astro.props;
+//const { posts } = Astro.props;
+let posts = await getPosts();
+
 ---
 
 <ul>

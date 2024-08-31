@@ -9,6 +9,26 @@ export const formatter: Intl.DateTimeFormat = new Intl.DateTimeFormat(I18N?.lang
 
 export const getFormattedDate = (date: Date): string => (date ? formatter.format(date) : '');
 
+//Function to Format date
+export const formatdate = (textvalue : string) => {
+  //const inputDate = "2022-01-23T23:10:22";
+  const date = new Date(textvalue);
+  return date.toLocaleDateString('en-US', { day: '2-digit', month: 'short', year: 'numeric' });
+
+  //console.log(formattedDate); // Output: 23 Jan, 2022
+}
+
+//Function to render Unicode Characters with symbol
+export const stringformatter = (textvalue : string) => {
+  return textvalue.replace(/&#(\d+);/g, (m, d) => String.fromCharCode(d));
+}
+
+//Function to strip HTML tags
+export const striphtmltags = (textvalue : string) => {
+  return stringformatter(textvalue.replace(/<[^>]*>?/gm, '').replace( /\.|&hellip;/g, '...'));
+}
+
+
 export const trim = (str = '', ch?: string) => {
   let start = 0,
     end = str.length || 0;

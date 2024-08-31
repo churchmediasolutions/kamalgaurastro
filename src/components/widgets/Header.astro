@@ -35,11 +35,10 @@ export interface Props {
 const {
   id = 'header',
   links = [],
-  actions = [],
-  isSticky = false,
+  isSticky = true,
   isDark = false,
-  isFullWidth = false,
-  showToggleTheme = false,
+  isFullWidth = true,
+  showToggleTheme = true,
   showRssFeed = false,
   position = 'center',
 } = Astro.props;
@@ -147,17 +146,6 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
             )
           }
         </div>
-        {
-          actions?.length ? (
-            <span class="ml-4 rtl:ml-0 rtl:mr-4">
-              {actions.map((btnProps) => (
-                <Button {...btnProps} class="ml-2 py-2.5 px-5.5 md:px-6 font-semibold shadow-none text-sm w-auto" />
-              ))}
-            </span>
-          ) : (
-            ''
-          )
-        }
       </div>
     </div>
   </div>

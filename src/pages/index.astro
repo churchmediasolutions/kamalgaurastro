@@ -1,8 +1,6 @@
 ---
 import Layout from '~/layouts/PageLayout.astro';
 
-import Hero from '~/components/widgets/Hero.astro';
-import Note from '~/components/widgets/Note.astro';
 import Features from '~/components/widgets/Features.astro';
 import Features2 from '~/components/widgets/Features2.astro';
 import Steps from '~/components/widgets/Steps.astro';
@@ -13,7 +11,7 @@ import Stats from '~/components/widgets/Stats.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
 
 const metadata = {
-  title: 'AstroWind — Free template for creating websites with Astro + Tailwind CSS',
+  title: 'Kamal Gaur — Honing the ability to envision products that need building',
   ignoreTitleTemplate: true,
 };
 ---
@@ -21,7 +19,7 @@ const metadata = {
 <Layout metadata={metadata}>
   <!-- Hero Widget ******************* -->
 
-  <Hero
+  <!-- <Hero
     actions={[
       {
         variant: 'primary',
@@ -35,7 +33,7 @@ const metadata = {
     image={{ src: '~/assets/images/hero-image.png', alt: 'AstroWind Hero Image' }}
   >
     <Fragment slot="title">
-      Free template for <span class="hidden xl:inline">creating websites with</span>
+      Free template for <span class="hidden xl:inline">creating websites without</span>
       <span class="text-accent dark:text-white highlight"> Astro 4.0</span> + Tailwind CSS
     </Fragment>
 
@@ -48,13 +46,87 @@ const metadata = {
       Suitable for Startups, Small Business, SaaS websites, Professional Portfolios, Marketing websites, Landing Pages &
       Blogs.
     </Fragment>
-  </Hero>
+  </Hero> -->
 
   <!-- Note Widget ******************* -->
 
-  <Note />
+  <!-- <Note /> -->
 
   <!-- Features Widget *************** -->
+
+  <Features2
+    title="Real World"
+    subtitle="Ideas that are meant for the <em>real</em> world"
+    tagline="Idea Hub"
+    items={[
+      {
+        title: "1 Line Ideas",
+        description: "Ideas that are meant for the <em>real</em> world, which do not exist anywhere yet, and which <em>can be conveyed</em> in a couple of lines",
+        icon: 'flat-color-icons:template',
+      },
+      {
+        title: "Concept Notes",
+        description:
+          "Ideas that are meant for the <em>real</em> world, which do not exist anywhere yet, and which <em>need way more than a couple of lines</em> for an explanation"
+,
+        icon: 'flat-color-icons:gallery',
+      },
+      {
+        title: "Improvements",
+        description:
+          "Ideas that are meant for the <em>real</em> world, which operate in <em>spaces that have already been invented</em>, and which offer <em>incremental improvements</em> on features that already exist"
+,
+        icon: 'flat-color-icons:approval',
+      },
+      {
+        title: "1 Line Ideas",
+        description:
+          "Ideas that are meant for the <em>real</em> world, which operate in <em>spaces that have already been invented</em>, but which are <em>unique additions</em> that can be <em>described succinctly in a couple of lines</em>",
+        icon: 'flat-color-icons:document',
+      }
+    ]}
+  >
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+    </Fragment>
+  </Features2>
+
+  <Features2
+    title="Digital World"
+    subtitle="Ideas that are meant for the <em>digital</em> world"
+    tagline="Idea Hub"
+    items={[
+      {
+        title: "1 Line Ideas",
+        description: "Ideas that are meant for the <em>real</em> world, which do not exist anywhere yet, and which <em>can be conveyed</em> in a couple of lines",
+        icon: 'flat-color-icons:template',
+      },
+      {
+        title: "Concept Notes",
+        description:
+          "Ideas that are meant for the <em>real</em> world, which do not exist anywhere yet, and which <em>need way more than a couple of lines</em> for an explanation"
+,
+        icon: 'flat-color-icons:gallery',
+      },
+      {
+        title: "Improvements",
+        description:
+          "Ideas that are meant for the <em>real</em> world, which operate in <em>spaces that have already been invented</em>, and which offer <em>incremental improvements</em> on features that already exist"
+,
+        icon: 'flat-color-icons:approval',
+      },
+      {
+        title: "1 Line Ideas",
+        description:
+          "Ideas that are meant for the <em>real</em> world, which operate in <em>spaces that have already been invented</em>, but which are <em>unique additions</em> that can be <em>described succinctly in a couple of lines</em>",
+        icon: 'flat-color-icons:document',
+      }
+    ]}
+  >
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+    </Fragment>
+  </Features2>
 
   <Features
     id="features"

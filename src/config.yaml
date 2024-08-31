@@ -1,5 +1,5 @@
 site:
-  name: AstroWind
+  name: Kamal Gaur
   site: 'https://astrowind.vercel.app'
   base: '/'
   trailingSlash: false
@@ -9,8 +9,8 @@ site:
 # Default SEO metadata
 metadata:
   title:
-    default: AstroWind
-    template: '%s — AstroWind'
+    default: Kamal Gaur
+    template: '%s — Kamal Gaur'
   description: "\U0001F680 Suitable for Startups, Small Business, Sass Websites, Professional Portfolios, Marketing Websites, Landing Pages & Blogs."
   robots:
     index: true
@@ -37,6 +37,12 @@ apps:
     postsPerPage: 6
 
     post:
+      isEnabled: true
+      permalink: '/%slug%' # Variables: %slug%, %year%, %month%, %day%, %hour%, %minute%, %second%, %category%
+      robots:
+        index: true
+
+    posts:
       isEnabled: true
       permalink: '/%slug%' # Variables: %slug%, %year%, %month%, %day%, %hour%, %minute%, %second%, %category%
       robots:
