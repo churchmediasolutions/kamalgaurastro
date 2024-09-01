@@ -1,0 +1,131 @@
+---
+import ToBlogLink from '~/components/blog/ToBlogLink.astro';
+import Layout from '~/layouts/PageLayout.astro';
+import { getPosts } from '~/utils/api';
+import Image from '~/components/common/Image.astro';
+import { Icon } from 'astro-icon/components';
+import { formatdate, stringformatter } from '~/utils/utils';
+import Header from '~/components/widgets/Header.astro';
+import { headerData } from '~/navigation';
+
+
+const { slug } = Astro.params;
+
+export async function getStaticPaths() {
+    let posts = await getPosts();
+
+    return posts.map((post) => {
+        return {
+            params: { slug: post.slug },
+            props: {
+                title: post.title.rendered,
+                content: post.content.rendered,
+                image: post._embedded && post._embedded['wp:featuredmedia'] ? post._embedded['wp:featuredmedia']['0'].source_url : '',
+                date : post.date,
+                author: 'Kamal Gaur',
+                category: 'Primary',
+                excerpt: post.excerpt.rendered,
+                // Spreading the Custom Fields into a meta object
+                meta: {
+                    ...post.acf,
+                },
+            },
+        };
+    });
+}
+
+const { title, content, image, author, date, excerpt} = Astro.props;
+
+const metadata = {
+  title: `${title}`,
+  robots: {
+    index: true,
+    follow: true,
+  },
+  openGraph: {
+    type: 'blog',
+  },
+};
+
+---
+
+<Layout metadata={metadata}>
+    <Fragment slot="header">
+        <Header
+          {...headerData}
+          isSticky
+        />
+      </Fragment>
+    <section class="py-8 sm:py-16 lg:py-20 mx-auto">
+        <article>
+          <header class={''}>
+            <div class="flex justify-between flex-col sm:flex-row max-w-5xl mx-auto mt-0 mb-2 px-4 sm:px-6 sm:items-center">
+              <p>
+                <Icon name="tabler:clock" class="w-4 h-4 inline-block -mt-0.5 dark:text-gray-400" />
+                <time datetime={String(date)} class="inline-block">{formatdate(date)}</time>
+                {
+                  author && (
+                    <>
+                      {' '}
+                      · <Icon name="tabler:user" class="w-4 h-4 inline-block -mt-0.5 dark:text-gray-400" />
+                      <span class="inline-block">{author}</span>
+                    </>
+                  )
+                }
+                <!-- {
+                  post.category && (
+                    <>
+                      {' '}
+                      ·{' '}
+                      <a class="hover:underline inline-block" href={getPermalink(category, 'category')}>
+                        {}
+                      </a>
+                    </>
+                  )
+                } -->
+              </p>
+            </div>
+      
+            <h1
+              class="px-4 sm:px-6 max-w-5xl mx-auto text-4xl md:text-5xl font-bold leading-tighter tracking-tighter font-heading"
+            >
+              {stringformatter(title)}
+            </h1>
+            <p
+              class="max-w-5xl mx-auto mt-4 mb-8 px-4 sm:px-6 text-xl md:text-2xl text-muted dark:text-slate-400 text-justify"
+            >
+            <!-- <Fragment set:html={excerpt} /> -->
+            </p>
+      
+            {
+              image ? (
+                <Image
+                  src={image}
+                  class="max-w-full lg:max-w-[900px] mx-auto mb-6 sm:rounded-md bg-gray-400 dark:bg-slate-700"
+                  widths={[400, 900]}
+                  sizes="(max-width: 900px) 400px, 900px"
+                  alt={excerpt || ''}
+                  width={900}
+                  height={506}
+                  loading="eager"
+                  decoding="async"
+                />
+              ) : (
+                <div class="max-w-5xl mx-auto px-4 sm:px-6">
+                  <div class="border-t dark:border-slate-700" />
+                </div>
+              )
+            }
+          </header>
+          <div
+            class="mx-auto px-6 sm:px-6 max-w-5xl prose prose-md lg:prose-xl dark:prose-invert dark:prose-headings:text-slate-300 prose-headings:font-heading prose-headings:leading-tighter prose-headings:tracking-tighter prose-headings:font-bold prose-a:text-primary dark:prose-a:text-blue-400 prose-img:rounded-md prose-img:shadow-lg mt-8 prose-headings:scroll-mt-[80px] prose-li:my-0"
+          >
+          <Fragment set:html={content} />
+          </div>
+          <div class="mx-auto px-6 sm:px-6 max-w-5xl mt-8 flex justify-between flex-col sm:flex-row">
+           
+          </div>
+        </article>
+      </section>
+    <ToBlogLink />
+  </Layout>

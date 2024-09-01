@@ -18,13 +18,15 @@ const { post } = Astro.props;
 const image = post._embedded && post._embedded['wp:featuredmedia'] ? post._embedded['wp:featuredmedia']['0'].source_url : undefined; 
 
 const link = APP_BLOG?.post?.isEnabled ? getPermalink(post.permalink, 'post') : '';
+
+const blogpath = `posts/${post.slug}`;
 ---
 
 <article class={`max-w-md mx-auto md:max-w-none grid gap-6 md:gap-8 ${image ? 'md:grid-cols-2' : ''}`}>
   {
     image &&
-      (link ? (
-        <a class="relative block group" href={link ?? 'javascript:void(0)'}>
+      (blogpath ? (
+        <a class="relative block group" href={blogpath ?? 'javascript:void(0)'}>
           <div class="relative h-0 pb-[56.25%] md:pb-[75%] md:h-72 lg:pb-[56.25%] overflow-hidden bg-gray-400 dark:bg-slate-700 rounded shadow-lg">
             {image && (
               <Image
@@ -92,7 +94,7 @@ const link = APP_BLOG?.post?.isEnabled ? getPermalink(post.permalink, 'post') : 
           link ? (
             <a
               class="inline-block hover:text-primary dark:hover:text-blue-700 transition ease-in duration-200"
-              href={link}
+              href={blogpath}
             >
               {stringformatter(post.title.rendered)}
             </a>

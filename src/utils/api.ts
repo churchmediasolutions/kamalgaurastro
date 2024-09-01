@@ -31,11 +31,17 @@ export async function fetchAPI(path) {
 
 export async function getPosts() {
     //const posts = await fetchAPI('posts?per_page=10&_fields=author,id,excerpt,title,slug,categories,tags&_embed');
-    const posts = await fetchAPI('posts?per_page=100&_embed&_fields=author,id,excerpt,title,slug,categories,date');
+    const posts = await fetchAPI('posts?per_page=100&_embed&_fields=author,id,excerpt,title,slug,categories,date,content');
     //const renewed = processPosts(posts)
     return posts;
 }
 
+export async function getPostBySlug(slugid: string) {
+  //const posts = await fetchAPI('posts?per_page=10&_fields=author,id,excerpt,title,slug,categories,tags&_embed');
+  const posts = await fetchAPI('posts?slug='+slugid+'&_fields=id,excerpt,title,slug,categories,date,content');
+  //const renewed = processPosts(posts)
+  return posts;
+}
 
 export const categories = [
     {
